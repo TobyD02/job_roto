@@ -1,6 +1,9 @@
 from datetime import datetime
 import json
+<<<<<<< HEAD
 import smtplib, ssl
+=======
+>>>>>>> 3e90fb3b4ccf10863674fcc34a4d11904e4909c8
 
 users = ['Toby', 'Leon', 'Ollie', 'Elena', 'James', 'Tom', 'Annie', 'Chloe']
 
@@ -50,10 +53,14 @@ def next_day():
         f.write(x)
 
 
+<<<<<<< HEAD
 def mail():
     port = 465
     with open("authentication.txt", "r") as f:
         password = f.read()
 
 
+=======
+seed()
+>>>>>>> 3e90fb3b4ccf10863674fcc34a4d11904e4909c8
 next_day()
