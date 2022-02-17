@@ -3,7 +3,7 @@ import json
 import smtplib, ssl
 
 users = ['Toby', 'Leon', 'Ollie', 'Elena', 'James', 'Tom', 'Annie', 'Chloe']
-
+mail_list = ['thetjdixon1234@gmail.com']
 
 def seed():
     
@@ -45,19 +45,37 @@ def next_day():
         jobs[i]['person'] = new_person
         jobs[i]['date'] = today
 
+    mail(jobs)
+    
     with open("jobs.json", "w") as f:
         x = json.dumps(jobs, indent=4)
         f.write(x)
 
 
-def mail():
+def mail(message_object):
     port = 465
     with open("authentication.txt", "r") as f:
         password = f.read()
 
+    sender = 'develop.tobyd@gmail.com'
+    
+    message ="""
+    JOBS FOR {date}
+
+    Dishwasher: {dishwasher}
+    Bins: {bins}
+    Sides: {sides}
+    """.format(date=message_object['Dishwasher']['date'],
+               dishwasher=message_object['Dishwasher']['person'],
+               bins=message_object['Bins']['person'],
+               sides=message_object['Sides']['person'])
+    
     context = ssl.create_default_context()
 
-    with smtplib.SMTP_SSL("")
+    with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+        server.login(sender, password)
+        for email in mail_list:        
+            server.sendmail(sender, email, message)
 
-
+#seed()
 next_day()
